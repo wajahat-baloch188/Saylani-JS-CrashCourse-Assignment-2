@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment-2</title>
+  </head>
+  <body>
+    <h1 id="heading">Wajahat</h1>
+    <p id="para">This is a Paragraph</p>
+    <ul></ul>
+    <script>
+      // Question 1
+      // Write a function that creates a closure and returns a function that can add a specific number to any number passed to it. For example, if the closure is created with 5, the returned function should add 5 to any number passed to it.
+      function data1(val1) {
+        return function (val2) {
+          return val1 + val2;
+        };
+      }
+      const data = data1(5);
+      console.log(data(5));
+
+      // Question 2
+      //Write a recursive function that searches an array for a specific value. The function should return true if the value is found, and false if it is not. You can assume that the array is not nested.
+
+      let myArray = [1, 2, 3, 4, 5, 45, 32, 34, 54, 65, 67, 78, 6, 7, 9];
+      function searchArray(arr, value) {
+        if (arr.length === 0) {
+          return false;
+        } else if (arr[0] === value) {
+          return true;
+        } else {
+          return searchArray(arr.slice(1), value);
+        }
+      }
+
+      let searchValue = 8;
+      let isFound = searchArray(myArray, searchValue);
+
+      console.log(
+        `The value ${searchValue} was ${
+          isFound ? "found" : "not found"
+        } in the array.`
+      );
+
+      // Question 3
+      // Write a function that adds a new paragraph element to the bottom of an HTML document. The function should take a string argument that will be used as the text content of the new paragraph element.
+
+      function addPara(text) {
+        document.body.innerHTML = "<p></p>";
+        document.querySelector("p").innerText = text;
+      }
+
+      addPara("This is a Paragraph");
+
+      //Question 4
+      // Write a function that adds a new list item to an unordered list in an HTML document. The function should take a string argument that will be used as the text content of the new list item.
+
+      function addListItem(items) {
+        document.querySelector("ul").innerHTML = "<li></li>";
+        document.querySelector("li").innerText = items;
+      }
+
+      addListItem("This is item");
+
+      // Question 5
+      // Write a function that changes the background color of an HTML element. The function should take two arguments: the first argument is a reference to the HTML element, and the second argument is a string representing the new background color.
+
+      function backgroundColorChange(id, color) {
+        document.getElementById(id).style.backgroundColor = color;
+      }
+      backgroundColorChange("heading", "red");
+
+      // Question 6
+      // Write a function that saves an object to localStorage. The function should take two arguments: the first argument is a string representing the key to use for storing the object, and the second argument is the object to store.
+      let obj = { name: "Wajahat", class: "SMIT", age: 21 };
+      function saveToLocalStorage(key, object) {
+        localStorage.setItem(key, JSON.stringify(object));
+      }
+
+      saveToLocalStorage("obj", obj);
+
+      let savedObject = JSON.parse(localStorage.getItem("obj"));
+      console.log(savedObject);
+
+      // Question 7
+      // Write a function that retrieves an object from localStorage. The function should take one argument, which is a string representing the key used to store the object. The function should return the object.
+      function getObjectFromLocalStorage(key) {
+        let item = localStorage.getItem(key);
+        if (item) {
+          return JSON.parse(item);
+        }
+        return null;
+      }
+      let myObject = getObjectFromLocalStorage("obj");
+      console.log(myObject);
+
+      // Question 8
+      //Write a function that takes an object and saves each property to localStorage using the property name as the key and the property value as the value. The function should also retrieve the object from localStorage and return it as a new object
+      function saveObjectPropertiesToLocalStorage(obj) {
+        for (const prop in obj) {
+          if (obj.hasOwnProperty(prop)) {
+            localStorage.setItem(prop, JSON.stringify(obj[prop]));
+          }
+        }
+
+        let newObj = {};
+        for (let i = 0; i < localStorage.length; i++) {
+          let key = localStorage.key(i);
+          newObj[key] = JSON.parse(localStorage.getItem(key));
+        }
+        return newObj;
+      }
+    </script>
+  </body>
+</html>
